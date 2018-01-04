@@ -68,7 +68,7 @@ const Coupons = sequelize.define('coupons', {
 		type: Sequelize.INTEGER
 	},
 	discount: {
-		type: Sequelize.INTEGER
+		type: Sequelize.STRING
 	},
   merchant: {
     type: Sequelize.STRING
@@ -90,7 +90,7 @@ const Coupons = sequelize.define('coupons', {
 
 Coupons.sync({force: false})
 
-//test data
+// test data
 // Coupons.findOrCreate({where:{imgUrl: 'test', title: 'testing', price: 69, discount: 69, merchant: 'test', finePrint: 'testingggg', description: 'tester', url: 't', saved: 'false'}}).spread((Coupons, created) => {
 //         console.log(Coupons.get({
 //           plain: true

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-// import DealList from './CouponListComp.js'
+import DealList from './DealListComp.js'
 
 class SavedDealsComp extends React.Component {
 	constructor(props) {
@@ -11,16 +11,24 @@ class SavedDealsComp extends React.Component {
 		this.getDeals = this.getDeals.bind(this);
 	}
 
-	getDeals() {
-		axios.get('/saved')
+	componentDidMount() {
+	    axios.get('/savedCoupons')
 		.then((response) => {
-			this.setState({savedDeals: response})
+			this.getDeals(response)
 		})
+
 	}
 
-	componentDidMount() {
-		this.getDeals()
+	getDeals(response) {
+		console.log('saveddd coupons response', response)
+
+		// this.setState({savedDeals: response})
+
 	}
+
+	// componentDidMount() {
+	// 	this.getDeals()
+	// }
 
 	render() {
 		return (

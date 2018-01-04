@@ -16,10 +16,10 @@ class Main extends React.Component {
     this.state = {
       coupons: [{
         image_url: "https://api.sqoot.com/v2/deals/5394809/image?api_key=kzjh2j",
-        title: "10% off at Stewart Hotel",
-        merchant_name: "Posh Bagel",
-        price: 177.39,
-        discount_percentage: 0.1,
+        title: "Finding you deals!",
+        merchant_name: "",
+        price: "",
+        discount_percentage: "",
         id: 1
       }],
       index: 0
@@ -38,28 +38,28 @@ class Main extends React.Component {
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
-        console.log("before setting state again", this.state.coupons)
         this.foo(response.data);
-        console.log("Coupons:",this.state.coupons);
       })
     })
   }
 
   componentDidUpdate() {
-    console.log('componenet is updating', this.state.coupons)
+    console.log('componenet is updating', this.state.index)
   }
 
   incrementIndex() {
-    this.state.index++;
+    // console.log('inside main.js incremneting', this.state.index)
+    this.setState({index:this.state.index+1})
+    // console.log(this.state.index, 'after incrementing')
   }
 
 
 
   render() {
-    console.log('how many times?', this.state.coupons)
+    // console.log('how many times?', this.state.coupons)
     return (
     <div>
-      <div className="container">
+      <div className="container" style={{'height':"55%", 'width':"55%"}}>
         <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
       </div>
     </div>

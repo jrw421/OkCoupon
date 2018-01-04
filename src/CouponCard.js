@@ -2,7 +2,7 @@ import React from 'react';
 
 const CouponCard = (props) => {
   return (
-      <div className="card mx-auto text-center" style={{"height": "75%", "width": "75%"}}>
+      <div className="card mx-auto text-center">
         <img className="card-img-top" src={props.image} alt="Card image cap"></img>
         <div className="card-body">
           <h5 className="card-title">{props.merchant}</h5>
