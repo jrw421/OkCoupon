@@ -22,7 +22,7 @@ class SavedDealsComp extends React.Component {
 	getDeals(response) {
 		console.log('saveddd coupons response', response)
 
-		// this.setState({savedDeals: response})
+		this.setState({savedDeals: response.data})
 
 	}
 
@@ -32,8 +32,10 @@ class SavedDealsComp extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Saved Deals!</h1>
+			<div className="container">
+				<div style={{"left": "50px"}}>
+					<h1>Saved Deals!</h1>
+				</div>
 				<DealList deals={this.state.savedDeals}/>
 			</div>
 		)
