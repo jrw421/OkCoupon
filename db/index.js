@@ -88,6 +88,12 @@ const Coupons = sequelize.define('coupons', {
   },
   pureUrl:{
     type: Sequelize.STRING
+  },
+  latitude:{
+    type: Sequelize.STRING
+  },
+  longitude:{
+    type: Sequelize.STRING
   }
 })
 

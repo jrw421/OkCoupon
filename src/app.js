@@ -17,13 +17,21 @@ class App extends React.Component {
       position: 0,
       top: 5,
       left: 0,
-      opacity: 1
+      opacity: 1,
+      mapDisplay: false // onClick of button, flip this to render map
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
     this.onSwipeStart = this.onSwipeStart.bind(this);
     this.onSwipeMove = this.onSwipeMove.bind(this);
     this.onSwipeEnd = this.onSwipeEnd.bind(this);
+    this.toggleMap = this.toggleMap.bind(this);
+  }
+
+  toggleMap(e) {
+    this.setState({mapDisplay: !this.state.mapDisplay}, () => {
+      this.state.mapDisplay ? console.log('show the map.') : console.log('hide the map.');
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -121,10 +129,12 @@ class App extends React.Component {
         console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
-        <Swipe
+        <button id="showMap" onClick={this.toggleMap}>show location</button>
+        { this.state.mapDisplay ? <h3>Map goes here </h3> : <Swipe
           onSwipeStart={this.onSwipeStart}
           onSwipeMove={this.onSwipeMove}
-          onSwipeEnd={this.onSwipeEnd}>
+          onSwipeEnd={this.onSwipeEnd}
+          >
 
 
             <CouponCard image={this.state.image_url}
@@ -135,7 +145,7 @@ class App extends React.Component {
               top={this.state.top}
               left={this.state.left}
               opacity={this.state.opacity}/>
-        </Swipe>
+        </Swipe>}
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
           <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.NoButton}>No</button>
