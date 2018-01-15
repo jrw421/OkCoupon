@@ -16,5 +16,18 @@ var couponHelper = function(city, callback) {
 
 }
 
-module.exports.couponHelper = couponHelper
+var categoryList = function(callback) {
+  var options = {
+    url: `http://api.sqoot.com/v2/categories?api_key=${key}`
+  }
 
+  request.get(options, function(err, res, body) {
+    if (err) {
+      console.log(err)
+    }
+    callback(JSON.parse(body))
+  })
+}
+
+module.exports.couponHelper = couponHelper
+module.exports.categoryList = categoryList

@@ -24,7 +24,8 @@ class Main extends React.Component {
       }],
       index: 0,
       postal: 0,
-      flag: false
+      flag: false,
+      categories: []
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.handleChange = this.handleChange.bind(this);

@@ -71,6 +71,12 @@ app.post('/no', (req, res) => {
   })
 })
 
+app.get('/categories', (req, res) => {
+  apiHelp.categoryList((categories) => {
+    res.status(200).send(categories)
+  })
+})
+
 
   app.set('port', process.env.PORT || 3000)
 
