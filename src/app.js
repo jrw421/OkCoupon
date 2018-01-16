@@ -32,13 +32,11 @@ class App extends React.Component {
   }
 
   toggleMap(e) {
-    this.setState({mapDisplay: !this.state.mapDisplay}, () => {
-      this.state.mapDisplay ? console.log('show the map.') : console.log('hide the map.');
-    })
+    this.setState({mapDisplay: !this.state.mapDisplay});
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("before setState:", this.state, "this props:", nextProps);
+    // console.log("before setState:", this.state, "this props:", nextProps);
     this.setState({
       image_url: nextProps.Coupon.imgUrl,
       title: nextProps.Coupon.title,
@@ -55,13 +53,13 @@ class App extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log("inside app anfd updating", this.state)
+    // console.log("inside app anfd updating", this.state)
   }
 
   getDeals() {
     axios.get('/')
     .then(function(response) {
-      console.log('successful post');
+      // console.log('successful post');
     })
     .catch((err) => {
       console.error(err);
@@ -73,7 +71,7 @@ class App extends React.Component {
       id: this.state.id
     })
       .then((response) => {
-        console.log('response from clicking yes', response)
+        // console.log('response from clicking yes', response)
       })
       .catch((err) => {
         console.error(err);
@@ -89,7 +87,7 @@ class App extends React.Component {
       id: this.state.id
     })
       .then((response) => {
-        console.log("response from clicking no", response)
+        // console.log("response from clicking no", response)
       })
       .catch((err) => {
         console.error(err);
@@ -99,12 +97,12 @@ class App extends React.Component {
   }
 
   onSwipeStart(event) {
-    console.log('Start swiping...', event);
+    // console.log('Start swiping...', event);
   }
 
   onSwipeMove(position, event) {
-    console.log(`Moved ${position.x} pixels horizontally`, event);
-    console.log(`Moved ${position.y} pixels vertically`, event);
+    // console.log(`Moved ${position.x} pixels horizontally`, event);
+    // console.log(`Moved ${position.y} pixels vertically`, event);
     this.setState({left: position.x,
                    position: position.x,
                    top: position.y,
@@ -133,7 +131,7 @@ class App extends React.Component {
   }
 
   render() {
-        console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
+        // console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
         <button id="showMap" onClick={this.toggleMap}>{this.state.mapDisplay ? "show coupon" : "show location"}</button>

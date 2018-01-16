@@ -8,7 +8,7 @@ class Map extends React.Component {
 
 	componentDidMount() {
 		let pin = {lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lon)};
-		let map = new google.maps.Map(document.getElementById('map'), {
+		let map = new google.maps.Map(document.getElementById(this.props.identifier ? this.props.identifier : "map"), {
 			zoom: 16,
 			center: pin
 		});
@@ -19,8 +19,7 @@ class Map extends React.Component {
 	}
 
 	render() {
-		console.log('map props: ', this.props);
-		return (<div id="map" style={{"position": "relative", "width": "100%", "height": "100%"}}></div>);
+		return (<div id={this.props.identifier ? this.props.identifier : "map"} style={{"position":"relative", "width": "100%", "height": "100%"}}></div>);
 	}
 }
 
