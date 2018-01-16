@@ -77,6 +77,19 @@ app.post('/newUser', (req, res) => {
   })
 })
 
+//////////////////////////////// ETHAN
+app.post('/newUser', (req, res) => {
+  // save a new username/password combo to users table
+
+});
+
+app.get('userData', (req, res) => {
+  // get all user's saved coupons:
+  // SELECT * FROM COUPONS WHERE USER_ID = REQ.BODY.USERID
+});
+
+//////////////////////////////////////
+
 app.post('/helper', (req, res) => {
 
   apiHelp.couponHelper(req.body.postal, req.body.filter, (data) => {
@@ -102,8 +115,8 @@ app.post('/helper', (req, res) => {
       })
     }
     res.status(200).send('done!')
-  })
-})
+  });
+});
 
 app.get('/arrayCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'null'}, limit: 40}).then((data) => {
@@ -115,28 +128,32 @@ app.get('/arrayCoupons', (req, res) => {
 app.get('/savedCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'true'}}).then((data) =>{
     res.status(200).send(data)
-  })
-})
+  });
+});
 
+////////////////////////////////////////////////////////////////////////// ETHAN
+// instead of storing all items and then updating items on 'yes', only save items on yes
+// and remove the 'no' route altogether.
 app.post('/yes', (req, res) => {
-  db.Coupons.update({saved: 'true'}, {where: {id: req.body.id}}).then((data) => { //don't update, save
-    res.status(201).send('updated to true')
-  })
-})
 
-app.post('/no', (req, res) => {
-  db.Coupons.update({saved: 'false'}, {where: {id: req.body.id}}).then((data) => {
-    res.status(201).send('updated to false')
-  })
-})
+  console.log('yes: ', req.body.data);
+
+  // db.Coupons.update({saved: 'true'}, {where: {id: req.body.id}}).then((data) => {
+  //   res.status(201).send('updated to true')
+  // });
+
+});
+
+//////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////// AARON
 app.get('/categories', (req, res) => {
   apiHelp.categoryList((categories) => {
     res.status(200).send(categories)
-  })
-})
-/////////////////////////////////////////////////////////////
+  });
+});
+///////////////////////////////////////////////////////////// 
+
 
   app.set('port', process.env.PORT || 3000)
 

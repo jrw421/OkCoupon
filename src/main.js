@@ -37,19 +37,9 @@ class Main extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.getCategories = this.getCategories.bind(this)
     this.selectCategory = this.selectCategory.bind(this)
-    this.foo = this.foo.bind(this);
     this.alerter = this.alerter.bind(this);
   }
 
-  foo(arg) {
-    setTimeout( () =>{
-      this.setState({
-        coupons: arg
-      }, () => {
-        console.log('saved coupons to state: ', this.state.coupons);
-      })
-    }, 2000)
-  }
 ///////////////////////////////////////////////////////////// AARON
 
   componentWillMount () {
@@ -76,9 +66,7 @@ class Main extends React.Component {
       })
       .then(() => {
       axios.get('/arrayCoupons').then((response) => {
-        console.log('is the problem here??', response.data)
-        this.foo(response.data);
-        console.log("Coupons:",this.state.coupons);
+        this.setState({coupons: response.data});
       })
     })
     }
