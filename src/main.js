@@ -20,7 +20,9 @@ class Main extends React.Component {
         merchant_name: "",
         price: "",
         discount_percentage: "",
-        id: 1
+        id: 1,
+        lat: 0,
+        lon: 0
       }],
       index: 0,
       postal: 0,
@@ -37,6 +39,8 @@ class Main extends React.Component {
     setTimeout( () =>{
       this.setState({
         coupons: arg
+      }, () => {
+        console.log('saved coupons to state: ', this.state.coupons);
       })
     }, 2000)
   }
