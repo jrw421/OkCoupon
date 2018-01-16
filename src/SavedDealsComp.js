@@ -12,7 +12,7 @@ class SavedDealsComp extends React.Component {
 	}
 
 	componentDidMount() {
-	    axios.get('/savedCoupons')
+	  axios.get('/savedCoupons')
 		.then((response) => {
 			this.getDeals(response)
 		})
@@ -25,10 +25,6 @@ class SavedDealsComp extends React.Component {
 		this.setState({savedDeals: response.data})
 
 	}
-
-	// componentDidMount() {
-	// 	this.getDeals()
-	// }
 
 	render() {
 		return (
