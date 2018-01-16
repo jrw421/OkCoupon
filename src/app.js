@@ -2,6 +2,7 @@ import React from 'react';
 import CouponCard from './CouponCard.js';
 import Swipe from 'react-easy-swipe';
 import axios from 'axios';
+import Map from './Map.js';
 
 
 class App extends React.Component {
@@ -14,16 +15,26 @@ class App extends React.Component {
       price: this.props.Coupon.price,
       discount_percentage: this.props.Coupon.discount,
       id: this.props.Coupon.id,
+      lat: this.props.Coupon.latitude,
+      lon: this.props.Coupon.longitude,
       position: 0,
       top: 5,
       left: 0,
-      opacity: 1
+      opacity: 1,
+      mapDisplay: false // onClick of button, flip this to render map
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
     this.onSwipeStart = this.onSwipeStart.bind(this);
     this.onSwipeMove = this.onSwipeMove.bind(this);
     this.onSwipeEnd = this.onSwipeEnd.bind(this);
+    this.toggleMap = this.toggleMap.bind(this);
+  }
+
+  toggleMap(e) {
+    this.setState({mapDisplay: !this.state.mapDisplay}, () => {
+      this.state.mapDisplay ? console.log('show the map.') : console.log('hide the map.');
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,6 +46,8 @@ class App extends React.Component {
       price: nextProps.Coupon.price,
       discount_percentage: nextProps.Coupon.discount,
       id: nextProps.Coupon.id,
+      lat: nextProps.Coupon.latitude,
+      lon: nextProps.Coupon.longitude,
       top: 5,
       left: 0,
       opacity: 1
@@ -68,6 +81,7 @@ class App extends React.Component {
 
 
       this.props.Increment();
+      if ( this.state.mapDisplay ) this.setState({mapDisplay: false});
   }
 
   NoButton() {
@@ -80,7 +94,8 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-      this.props.Increment()
+      this.props.Increment();
+      if ( this.state.mapDisplay ) this.setState({mapDisplay: false});
   }
 
   onSwipeStart(event) {
@@ -121,10 +136,12 @@ class App extends React.Component {
         console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
-        <Swipe
+        <button id="showMap" onClick={this.toggleMap}>{this.state.mapDisplay ? "show coupon" : "show location"}</button>
+        { this.state.mapDisplay ? <Map lat={this.state.lat} lon={this.state.lon}/> : <Swipe
           onSwipeStart={this.onSwipeStart}
           onSwipeMove={this.onSwipeMove}
-          onSwipeEnd={this.onSwipeEnd}>
+          onSwipeEnd={this.onSwipeEnd}
+          >
 
 
             <CouponCard image={this.state.image_url}
@@ -135,7 +152,7 @@ class App extends React.Component {
               top={this.state.top}
               left={this.state.left}
               opacity={this.state.opacity}/>
-        </Swipe>
+        </Swipe>}
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
           <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.NoButton}>No</button>

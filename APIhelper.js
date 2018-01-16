@@ -11,6 +11,7 @@ var couponHelper = function(city, callback) {
 		if (err) {
 			console.log(err)
 		}
+		console.log('response body: ', JSON.parse(body));
 		callback(JSON.parse(body));
 	})
 

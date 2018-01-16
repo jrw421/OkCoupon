@@ -1,14 +1,15 @@
 var Sequelize = require('sequelize');
-const sequelize = new Sequelize('d7o1pk4anijasv','jgxipyhybzpgkr', 'a269bfed0e705c8c596db36b90329f4f928ece8403df8834d317ee79b20251ce', {
-  host: 'ec2-54-243-61-173.compute-1.amazonaws.com',
+const sequelize = new Sequelize('legacy','legacy', 'archimedeslegacy', {
+  host: 'legacy.ciqkxj8b112q.us-east-2.rds.amazonaws.com',
   dialect: 'postgres' || 'mysql',
+  port: 5433,
  //  dialect:  'postgres',
  // protocol: 'postgres',
  // port:     match[4],
  // host:     match[3],
  // logging: false,
  dialectOptions: {
-     ssl: true
+     ssl:'Amazon RDS'
  },
   pool: {
     max: 5,
@@ -87,6 +88,12 @@ const Coupons = sequelize.define('coupons', {
     defaultValue: 'null'
   },
   pureUrl:{
+    type: Sequelize.STRING
+  },
+  latitude:{
+    type: Sequelize.STRING
+  },
+  longitude:{
     type: Sequelize.STRING
   }
 })

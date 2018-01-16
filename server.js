@@ -23,9 +23,13 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.post('/helper', (req, res) => {
   apiHelp.couponHelper(req.body.postal, (data) => {
+    // console.log('serverjs data: ', data);
     for(var i = 0; i < data.deals.length; i++) {
+      // console.log('data.deald[i]: ', data.deals[i]);
       var eachDeal = data.deals[i]
       db.Coupons.findOrCreate({where: {
+          latitude: eachDeal.deal.merchant.latitude.toString(),
+          longitude: eachDeal.deal.merchant.longitude.toString(),
           imgUrl: eachDeal.deal.image_url, 
           title: eachDeal.deal.title, 
           price: JSON.stringify(eachDeal.deal.price),
@@ -41,7 +45,6 @@ app.post('/helper', (req, res) => {
           }))
       })
     }
-
     res.status(200).send('done!')
   })
 })
@@ -54,7 +57,7 @@ app.get('/arrayCoupons', (req, res) => {
 })
 
 app.get('/savedCoupons', (req, res) => {
-  db.Coupons.findAll({where: {saved: 'true'}, limit: 20}).then((data) =>{
+  db.Coupons.findAll({where: {saved: 'true'}}).then((data) =>{
     res.status(200).send(data)
   })
 })
