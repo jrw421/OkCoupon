@@ -11,7 +11,7 @@ class Deal extends React.Component {
 	}
 
 	handleClick(){
-		this.setState({mapDisplay: true});
+		this.setState({mapDisplay: !this.state.mapDisplay});
 	}	
 
 	render(){
