@@ -8,6 +8,8 @@ import {
  } from 'react-router-dom';
 
 import axios from 'axios';
+import Login from './Login.js';
+import SignUp from './SignUp.js';
 //testing out my comments
 
 class Main extends React.Component {
@@ -81,7 +83,7 @@ class Main extends React.Component {
     })
     }
   }
-  
+
   alerter() {
     alert("you're all out of coupons! go check out what you've got saved!")
   }
@@ -91,6 +93,10 @@ class Main extends React.Component {
         if(this.state.flag === false){
               return (
     <div className='container'>
+      login
+      <Login/>
+      sign up
+      <SignUp/>
     <p> Whats your area code? </p>
         <input id="postal" className="password" placeholder="Your Postal Code - Here" type="text" value={this.state.sqrft} onChange={this.handleChange}/>
         <button onClick={this.handleClick} className="btn btn-dark"> Postal Code
