@@ -3,7 +3,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const app = express();
-const db = require('./db/index.js')
+const db = require('./db/index2.js')
 const apiHelp = require('./APIhelper.js');
 const bodyParser = require('body-parser');
 const compiler = webpack(webpackConfig);
@@ -37,25 +37,25 @@ app.use(bodyParser.json());
 // };
 
 //if user_name is found - get all saved coupons
-app.post('/user', (req, res) => {
-  console.log('what is the req in server ', req.body.user_name)
+// app.post('/user', (req, res) => {
+//   console.log('what is the req in server ', req.body.user_name)
 
-  db.Coupons.findAll({where: {user_name: req.body.user_name, password: req.body.password}})
-    .then(() => {
-      // res.redirect('/')
-      Coupons.findAll({
-        include: [{
-          model: Users
-        }]
-      })
-      .then((data) => {
-        res.send("SUCCESSSSS")
-      })
-    })
-    // .catch(() => {
-    //   res.redirect('/newUser')
-    // })
-})
+//   db.Coupons.findAll({where: {user_name: req.body.user_name, password: req.body.password}})
+//     .then(() => {
+//       // res.redirect('/')
+//       Coupons.findAll({
+//         include: [{
+//           model: Users
+//         }]
+//       })
+//       .then((data) => {
+//         res.send("SUCCESSSSS")
+//       })
+//     })
+//     // .catch(() => {
+//     //   res.redirect('/newUser')
+//     // })
+// })
 //where id is username id
 // db.Coupons.findAll({where: {user_name: req.body.user_name}}) //FIX THIS
 // .then((data) => {
@@ -63,19 +63,48 @@ app.post('/user', (req, res) => {
 // })  //, saved: 'true'
 
 
+// app.post('/newUser', (req, res) => {
+//   console.log('req for POST ', req.body)
+//   db.Users.create({
+//     user_name: req.body.user_name,
+//     password: req.body.password
+//   })
+//   .then((data) => {
+//     res.status(200).send(data)
+//   })
+//   .catch(() => {
+//     res.send('oops')
+//   })
+// })
+
+//////////////////////////////// ETHAN
 app.post('/newUser', (req, res) => {
-  console.log('req for POST ', req.body)
-  db.Users.create({
-    user_name: req.body.user_name,
-    password: req.body.password
-  })
-  .then((data) => {
-    res.status(200).send(data)
-  })
-  .catch(() => {
-    res.send('oops')
-  })
-})
+  let u = req.body.username;
+  let p = req.body.password;
+  // save a new username/password combo to users table
+  db.addUser(u, p, () => {
+    // redirect to login page
+    res.status(302).redirect('/login'); // still need to create /login page in react router.
+  });
+});
+
+app.post('/login', (req, res) => {
+  let u = req.body.username;
+  let p = req.body.password;
+  db.authenticateUser(u, p, () => {
+    res.status(302).redirect('/');
+  });
+});
+
+app.get('userData', (req, res) => {
+  let u = req.body.username;
+  // get all user's saved coupons:
+  db.getSaved(u, () => {
+    res.status(302).redirect('/saved');
+  });
+});
+
+//////////////////////////////////////
 
 app.post('/helper', (req, res) => {
 
@@ -102,8 +131,8 @@ app.post('/helper', (req, res) => {
       })
     }
     res.status(200).send('done!')
-  })
-})
+  });
+});
 
 app.get('/arrayCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'null'}, limit: 40}).then((data) => {
@@ -115,28 +144,33 @@ app.get('/arrayCoupons', (req, res) => {
 app.get('/savedCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'true'}}).then((data) =>{
     res.status(200).send(data)
-  })
-})
+  });
+});
 
+////////////////////////////////////////////////////////////////////////// ETHAN
+// instead of storing all items and then updating items on 'yes', only save items on yes
+// and remove the 'no' route altogether.
 app.post('/yes', (req, res) => {
-  db.Coupons.update({saved: 'true'}, {where: {id: req.body.id}}).then((data) => { //don't update, save
-    res.status(201).send('updated to true')
-  })
-})
+  let u = req.body.username; // doesn't exist yet
+  let c = req.body.data;
+  console.log('yes: ', req.body.data);
 
-app.post('/no', (req, res) => {
-  db.Coupons.update({saved: 'false'}, {where: {id: req.body.id}}).then((data) => {
-    res.status(201).send('updated to false')
-  })
-})
+  db.addSaved(u, c, () => {
+    res.status(201).send('saved coupon to db.');
+  });
+
+});
+
+//////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////// AARON
 app.get('/categories', (req, res) => {
   apiHelp.categoryList((categories) => {
     res.status(200).send(categories)
-  })
-})
-/////////////////////////////////////////////////////////////
+  });
+});
+///////////////////////////////////////////////////////////// 
+
 
   app.set('port', process.env.PORT || 3000)
 

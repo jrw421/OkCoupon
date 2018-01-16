@@ -39,6 +39,7 @@ var categoryList = function(callback) {
       console.log(err)
       callback([])
     }
+    console.log('json: ', JSON.parse(body).categories);
     callback(JSON.parse(body).categories)
   })
 }

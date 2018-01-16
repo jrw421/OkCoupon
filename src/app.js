@@ -68,7 +68,8 @@ class App extends React.Component {
 
   YesButton() {
     axios.post('/yes', {
-      id: this.state.id
+      // ETHAN:
+      data: this.state
     })
       .then((response) => {
         // console.log('response from clicking yes', response)
@@ -82,19 +83,15 @@ class App extends React.Component {
       if ( this.state.mapDisplay ) this.setState({mapDisplay: false});
   }
 
+  ////////////////// ETHAN
   NoButton() {
-    axios.post('/no', {
-      id: this.state.id
-    })
-      .then((response) => {
-        // console.log("response from clicking no", response)
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-      this.props.Increment();
-      if ( this.state.mapDisplay ) this.setState({mapDisplay: false});
+  // delete express route,
+  // just call Increment to 
+  // get the next coupon.
+    this.props.Increment();
+    if ( this.state.mapDisplay ) this.setState({mapDisplay: false});
   }
+  /////////////////////////
 
   onSwipeStart(event) {
     // console.log('Start swiping...', event);
