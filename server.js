@@ -22,7 +22,7 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 
 app.post('/helper', (req, res) => {
-  apiHelp.couponHelper(req.body.postal, (data) => {
+  apiHelp.couponHelper(req.body.postal, req.body.filter, (data) => {
     for(var i = 0; i < data.deals.length; i++) {
       var eachDeal = data.deals[i]
       db.Coupons.findOrCreate({where: {
@@ -71,12 +71,13 @@ app.post('/no', (req, res) => {
   })
 })
 
+///////////////////////////////////////////////////////////// AARON
 app.get('/categories', (req, res) => {
   apiHelp.categoryList((categories) => {
     res.status(200).send(categories)
   })
 })
-
+///////////////////////////////////////////////////////////// 
 
   app.set('port', process.env.PORT || 3000)
 
