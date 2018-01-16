@@ -22,8 +22,8 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 
 app.post('/helper', (req, res) => {
-  apiHelp.couponHelper(req.body.postal, (data) => {
-    // console.log('serverjs data: ', data);
+
+  apiHelp.couponHelper(req.body.postal, req.body.filter, (data) => {
     for(var i = 0; i < data.deals.length; i++) {
       // console.log('data.deald[i]: ', data.deals[i]);
       var eachDeal = data.deals[i]
@@ -74,6 +74,13 @@ app.post('/no', (req, res) => {
   })
 })
 
+///////////////////////////////////////////////////////////// AARON
+app.get('/categories', (req, res) => {
+  apiHelp.categoryList((categories) => {
+    res.status(200).send(categories)
+  })
+})
+///////////////////////////////////////////////////////////// 
 
   app.set('port', process.env.PORT || 3000)
 
