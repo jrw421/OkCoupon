@@ -51,14 +51,34 @@ sequelize
 
 // image url
 // title
-// price 
+// price
 // discount
 // merchant (name)
 // fine print and description - saved and then provided on saved page…
 // url
 
+const Users = sequelize.define('users', {
+  uid: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true
+  },
+  user_name: {
+    type: Sequelize.STRING
+  },
+  password: {
+    type: Sequelize.STRING
+  }
+});
 
 const Coupons = sequelize.define('coupons', {
+  cid: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    allowNull: false,
+    autoIncrement: true
+  },
 	imgUrl: {
 		type: Sequelize.STRING
 	},
@@ -98,8 +118,8 @@ const Coupons = sequelize.define('coupons', {
   }
 })
 
-
-Coupons.sync({force: false})
+// Users.sync({force: false})
+// Coupons.sync({force: false})
 
 // test data
 // Coupons.findOrCreate({where:{imgUrl: 'test', title: 'testing', price: 69, discount: 69, merchant: 'test', finePrint: 'testingggg', description: 'tester', url: 't', saved: 'false'}}).spread((Coupons, created) => {
@@ -108,7 +128,11 @@ Coupons.sync({force: false})
 //         }))
 //       })
 
+Users.belongsToMany(Coupons, {through: 'UsersCoupons'});
+Coupons.belongsToMany(Users, {through: 'UsersCoupons'});
+
 module.exports = {
   sequelize: sequelize,
   Coupons: Coupons,
+  Users: Users
 }
