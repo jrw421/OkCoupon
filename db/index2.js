@@ -8,7 +8,7 @@ var connection = mysql.createConnection({
 });
 
 module.exports.authenticateUser = function(user, password, callback) {
-  connection.query(`SELECT user_name, password FROM users WHERE (user_name, password) = ('${user}', '${password}')`, function(err, results) {
+  connection.query(`SELECT id FROM users WHERE (user_name, password) = ('${user}', '${password}')`, function(err, results) {
     if (err) {
       callback(err, null);
     } else {
@@ -18,7 +18,8 @@ module.exports.authenticateUser = function(user, password, callback) {
 }
 
 module.exports.addUser = function(user, password, callback) {
-  connection.query(`SELECT user_name FROM users WHERE (user_name) = ('${user}')`), function(err, results) {
+  connection.query(`SELECT user_name FROM users WHERE (user_name) = ('${user}')`, function(err, results) {
+      console.log('results ', results)
       if (results.length === 0) {
         connection.query(`INSERT INTO users (user_name, password) VALUES ('${user}', '${password}')`, function(err, results) {
           if (err) {
@@ -30,7 +31,7 @@ module.exports.addUser = function(user, password, callback) {
       } else {
       callback(null, [])
     }
-  }
+  });
 };
 
 module.exports.addSaved = function(user, coupon, callback) {

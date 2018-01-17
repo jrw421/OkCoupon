@@ -30,7 +30,7 @@ class Main extends React.Component {
       postal: 0,
       flag: false,
       categories: [],
-      filter: []
+      filter: [],
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -119,10 +119,6 @@ class Main extends React.Component {
         if(this.state.flag === false){
               return (
     <div className='container'>
-      login
-      <Login/>
-      sign up
-      <SignUp/>
     <p> Whats your area code? </p>
         <input id="postal" className="password" placeholder="Your Postal Code - Here" type="text" value={this.state.sqrft} onChange={this.handleChange}/>
         <button onClick={this.handleClick} className="btn btn-dark"> Postal Code
