@@ -100,6 +100,19 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.post('/delete', (req, res) => {
+  let u = req.body.user_name;
+
+  console.log('logging in: ', u, p);
+  db.deleteSaved(u, (err, data) => {
+    if (data.length) {
+      res.send(data);
+    } else {
+      res.status(404).end()
+    }
+  });
+})
+
 app.get('userData', (req, res) => {
   let u = req.body.username;
   // get all user's saved coupons:
@@ -168,9 +181,9 @@ app.post('/helper', (req, res) => {
 //
 app.get('/savedCoupons', (req, res) => {
   console.log('id: ', req.query.userID);
-  // db.getSaved(req.body.user_name).then((data) =>{
-  //   res.status(200).send(data)
-  // });
+  db.getSaved(req.body.user_name).then((data) =>{
+    res.status(200).send(data)
+  });
 });
 
 // for(var i = 0; i < data.deals.length; i++) {

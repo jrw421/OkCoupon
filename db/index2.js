@@ -47,13 +47,22 @@ module.exports.addSaved = function(userID, coupon, callback) {
     });
 };
 
-module.exports.getSaved = function(user, callback) {
-    connection.query(`SELECT * from coupons WHERE (user_id) = ('${results[0].id}')`, function(err, result) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, result);
-      }
-    });
+module.exports.getSaved = function(userID, callback) {
+  connection.query(`SELECT * from coupons WHERE (user_id) = ('${userID}')`, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
 
+module.exports.deleteSaved = function(userID, coupon, callback) {
+  connection.query(`DELETE FROM coupons (user_id) = ('${userID}')`, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
 };
