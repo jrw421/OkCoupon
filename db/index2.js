@@ -35,15 +35,13 @@ module.exports.addUser = function(user, password, callback) {
 };
 
 module.exports.addSaved = function(user, coupon, callback) {
-  connection.query(`SELECT (id) from Users WHERE (user_name) = ('${user}')`, function(err, results) {
-    connection.query(`INSERT INTO coupons (user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
-    ('${results[0].id}', '${coupon.latitude}', '${coupon.longitude}', '${coupon.imgUrl}', '${coupon.title}', '${coupon.price}', '${coupon.discount}', '${coupon.merchant}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
+  connection.query(`INSERT INTO coupons (user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
+    ('${user}', '${coupon.latitude}', '${coupon.longitude}', '${coupon.imgUrl}', '${coupon.title}', '${coupon.price}', '${coupon.discount}', '${coupon.merchant}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
       if (err) {
         callback(err, null);
       } else {
         callback(null, result);
       }
-    });
   });
 };
 
