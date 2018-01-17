@@ -3,7 +3,7 @@ import CouponCard from './CouponCard.js';
 import Swipe from 'react-easy-swipe';
 import axios from 'axios';
 import Map from './map.js';
-import Cookie from 'universal-cookie'
+import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
 
