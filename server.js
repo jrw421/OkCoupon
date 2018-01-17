@@ -145,11 +145,12 @@ app.post('/helper', (req, res) => {
 //   })
 // })
 //
-// app.get('/savedCoupons', (req, res) => {
-//   db.Coupons.findAll({where: {saved: 'true'}}).then((data) =>{
-//     res.status(200).send(data)
-//   });
-// });
+app.get('/savedCoupons', (req, res) => {
+  console.log('id: ', req.query.userID);
+  // db.getSaved(req.body.user_name).then((data) =>{
+  //   res.status(200).send(data)
+  // });
+});
 
 ////////////////////////////////////////////////////////////////////////// ETHAN
 // instead of storing all items and then updating items on 'yes', only save items on yes

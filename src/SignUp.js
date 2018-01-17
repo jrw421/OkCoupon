@@ -30,8 +30,7 @@ class SignUp extends React.Component {
   }
 
   handleInputClick(e) {
-    console.log("stuff", this.state.user_name, this.state.password)
-
+    e.preventDefault();
     axios.post('/signUp', {user_name: this.state.user_name, password: this.state.password})
     .then((res) => {
       console.log('success!')

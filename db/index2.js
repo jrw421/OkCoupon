@@ -48,7 +48,7 @@ module.exports.addSaved = function(user, coupon, callback) {
 };
 
 module.exports.getSaved = function(user, callback) {
-  connection.query(`SELECT (id) from Users WHERE (username) = ('${user}')`), function(err, results) {
+  connection.query(`SELECT (id) from Users WHERE (username) = ('${user}')`, function(err, results) {
     connection.query(`SELECT * from coupons WHERE (user_id) = ('${results[0].id}')`, function(err, result) {
       if (err) {
         callback(err, null);
@@ -56,5 +56,5 @@ module.exports.getSaved = function(user, callback) {
         callback(null, result);
       }
     });
-  };
+  });
 };

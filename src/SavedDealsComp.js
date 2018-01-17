@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios'
-import DealList from './DealListComp.js'
+import DealList from './DealListComp.js';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class SavedDealsComp extends React.Component {
 	constructor(props) {
@@ -12,18 +15,19 @@ class SavedDealsComp extends React.Component {
 	}
 
 	componentDidMount() {
-	  axios.get('/savedCoupons')
+		const id = cookies.get('userID');
+		console.log('id: ', id);
+	  axios.get('/savedCoupons', {params: {"userID": id}})
 		.then((response) => {
-			this.getDeals(response)
+			console.log('response from get/savedCoupons: ', response);
+			// this.getDeals(response)
 		})
 
 	}
 
 	getDeals(response) {
 		console.log('saveddd coupons response', response)
-
 		this.setState({savedDeals: response.data})
-
 	}
 
 	render() {
