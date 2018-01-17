@@ -48,12 +48,21 @@ module.exports.addSaved = function(userID, coupon, callback) {
 };
 
 module.exports.getSaved = function(userID, callback) {
-    connection.query(`SELECT * from coupons WHERE (user_id) = ('${userID}')`, function(err, result) {
-      if (err) {
-        callback(err, null);
-      } else {
-        callback(null, result);
-      }
-    });
+  connection.query(`SELECT * from coupons WHERE (user_id) = ('${userID}')`, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
 
+module.exports.deleteSaved = function(userID, couponURL, callback) {
+  connection.query(`DELETE FROM coupons WHERE (user_id, imgUrl) = ('${userID}', '${couponURL}')`, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
 };

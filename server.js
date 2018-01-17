@@ -100,6 +100,22 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.post('/delete', (req, res) => {
+
+  let i = req.body.params.userID;
+  let c = req.body.params.couponURL;
+
+  console.log('deleting: ', i, c);
+  db.deleteSaved(i, c, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('in server ')
+      res.status(200).send(data)
+    }
+  });
+})
+
 app.get('userData', (req, res) => {
   let u = req.body.username;
   // get all user's saved coupons:
