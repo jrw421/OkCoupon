@@ -2,7 +2,7 @@ import React from 'react';
 import CouponCard from './CouponCard.js';
 import Swipe from 'react-easy-swipe';
 import axios from 'axios';
-import Map from './Map.js';
+import Map from './map.js';
 
 
 class App extends React.Component {
@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       image_url: this.props.Coupon.imgUrl || 'http://psdwizard.com/wp-content/uploads/2016/07/octo-loader.gif',
-      title: this.props.Coupon.title, 
+      title: this.props.Coupon.title,
       merchant_name: this.props.Coupon.merchant,
       price: this.props.Coupon.price,
       discount_percentage: this.props.Coupon.discount,
@@ -86,7 +86,7 @@ class App extends React.Component {
   ////////////////// ETHAN
   NoButton() {
   // delete express route,
-  // just call Increment to 
+  // just call Increment to
   // get the next coupon.
     this.props.Increment();
     if ( this.state.mapDisplay ) this.setState({mapDisplay: false});

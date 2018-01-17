@@ -6,13 +6,10 @@ import {
   Link
  } from 'react-router-dom';
 import axios from 'axios';
-// app.use(passport.initialize());
+import Cookies from 'universal-cookie';
 
-//check to see if the username is in the database
-  //if true, check the password and see if it matches,
-    //then redirect to home page
+const cookies = new Cookies();
 
-  //if false, redirect to sign up page
 
 class Login extends React.Component {
   constructor(props) {
@@ -39,20 +36,13 @@ class Login extends React.Component {
   handleInputClick(e) {
     console.log("stuff", this.state.user_name, this.state.password)
 
-    axios.post('/user', {user_name: this.state.user_name, password: this.state.password})
+    axios.post('/login', {user_name: this.state.user_name, password: this.state.password})
     .then((data) => {
-      console.log('success!')
-      console.log('this is the data ', data)
-      // this.setState({
-        //saved to data... can't do here
-      // })
-      res.redirect('/')
-      //redirect to home page s
+      cookies.set(this.state.user_name, data.data[0].id, {path: '/'})
+      this.props.logIn(this.state.user_name);
     })
     .catch((err) => {
       console.log('Do you need to sign up?')
-      // res.redirect('/newUser')
-      //redirect to sign up
     })
   }
 

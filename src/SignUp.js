@@ -7,12 +7,6 @@ import {
  } from 'react-router-dom';
 import axios from 'axios';
 
-//check to see if the username is in the database
-  //if true, check the password and see if it matches,
-    //then redirect to home page
-
-  //if false, redirect to sign up page
-
 class SignUp extends React.Component {
   constructor(props) {
     super(props)
@@ -38,7 +32,7 @@ class SignUp extends React.Component {
   handleInputClick(e) {
     console.log("stuff", this.state.user_name, this.state.password)
 
-    axios.post('/newUser', {user_name: this.state.user_name, password: this.state.password})
+    axios.post('/signUp', {user_name: this.state.user_name, password: this.state.password})
     .then((res) => {
       console.log('success!')
     })
@@ -46,8 +40,6 @@ class SignUp extends React.Component {
 
 
   render() {
-    // {console.log('username ', this.state.user_name)}
-    // {console.log('password ', this.state.password)}
     return (
       <form>
         <input onChange={this.handleInputChangeUserName.bind(this)} type="text" placeholder="username"></input>
