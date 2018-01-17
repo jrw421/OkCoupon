@@ -2,18 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {
-  HashRouter as Router,
-  Route,
-  Link
- } from 'react-router-dom';
 
- import Home from './main.js';
- import SavedDealsComp from './SavedDealsComp.js'
- import Login from './Login.js';
- import SignUp from './SignUp.js'
- import Cookies from 'universal-cookie';
+HashRouter as Router,
+Route,
+Link
+} from 'react-router-dom';
 
- const cookies = new Cookies();
+import Home from './main.js';
+import SavedDealsComp from './SavedDealsComp.js'
+import Login from './Login.js';
+import SignUp from './SignUp.js'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 
  //import path files
 
@@ -46,7 +47,13 @@ class Navigation extends React.Component {
     this.setState({
       loggedIn: false
     })
-    cookies.remove(this.state.user_name)
+    cookies.remove('userID')
+  }
+
+  componentWillMount() {
+    if ( cookies.get('userID') ) {
+      this.setState({loggedIn: true});
+    }
   }
 
   render() {
@@ -95,7 +102,7 @@ class Navigation extends React.Component {
           </div>
 
   	    <Route exact path="/" component={Home}/>
-        <Route path="/saved" component={SavedDealsComp}/>
+        <Route path="/saved" component={SavedDealsComp} />
         {/* <Route path="/newUser" component={SignUp}/> */}
 
         </div>

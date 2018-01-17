@@ -131,6 +131,34 @@ app.post('/helper', (req, res) => {
   });
 });
 
+// app.post('/helper', (req, res) => {
+
+//   apiHelp.couponHelper(req.body.postal, req.body.filter, (data) => {
+//     for(var i = 0; i < data.deals.length; i++) {
+//       // console.log('data.deald[i]: ', data.deals[i]);
+//       var eachDeal = data.deals[i]
+//       db.Coupons.findOrCreate({where: {
+//           latitude: eachDeal.deal.merchant.latitude.toString(),
+//           longitude: eachDeal.deal.merchant.longitude.toString(),
+//           imgUrl: eachDeal.deal.image_url,
+//           title: eachDeal.deal.title,
+//           price: JSON.stringify(eachDeal.deal.price),
+//           discount: JSON.stringify(eachDeal.deal.discount_percentage),
+//           merchant: eachDeal.deal.merchant.name,
+//           url: eachDeal.deal.url,
+//           pureUrl: eachDeal.deal.untracked_url
+//         }
+//       })
+//         .spread((Teams, created) => {
+//           console.log(Teams.get({
+//             plain: true
+//           }))
+//       })
+//     }
+//     res.status(200).send('done!')
+//   });
+// });
+
 // app.get('/arrayCoupons', (req, res) => {
 //   db.Coupons.findAll({where: {saved: 'null'}, limit: 40}).then((data) => {
 //     res.body = data
@@ -138,11 +166,12 @@ app.post('/helper', (req, res) => {
 //   })
 // })
 //
-// app.get('/savedCoupons', (req, res) => {
-//   db.Coupons.findAll({where: {saved: 'true'}}).then((data) =>{
-//     res.status(200).send(data)
-//   });
-// });
+app.get('/savedCoupons', (req, res) => {
+  console.log('id: ', req.query.userID);
+  // db.getSaved(req.body.user_name).then((data) =>{
+  //   res.status(200).send(data)
+  // });
+});
 
 // for(var i = 0; i < data.deals.length; i++) {
 //   // console.log('data.deald[i]: ', data.deals[i]);
@@ -170,7 +199,7 @@ app.post('/helper', (req, res) => {
 // instead of storing all items and then updating items on 'yes', only save items on yes
 // and remove the 'no' route altogether.
 app.post('/yes', (req, res) => {
-  let u = req.body.userID; // doesn't exist yet
+  let u = req.body.userID;
   let c = req.body.data;
   db.addSaved(u, c, () => {
     res.status(201).send('saved coupon to db.');
