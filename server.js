@@ -89,6 +89,7 @@ app.post('/signUp', (req, res) => {
 app.post('/login', (req, res) => {
   let u = req.body.user_name;
   let p = req.body.password;
+  console.log('logging in: ', u, p);
   db.authenticateUser(u, p, (err, data) => {
     // console.log('data ', data[0].id) //cookie
     if (data.length) {
@@ -156,8 +157,6 @@ app.post('/helper', (req, res) => {
 app.post('/yes', (req, res) => {
   let u = req.body.username; // doesn't exist yet
   let c = req.body.data;
-  console.log('yes: ', req.body.data);
-
   db.addSaved(u, c, () => {
     res.status(201).send('saved coupon to db.');
   });
