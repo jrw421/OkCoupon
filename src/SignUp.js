@@ -7,12 +7,6 @@ import {
  } from 'react-router-dom';
 import axios from 'axios';
 
-//check to see if the username is in the database
-  //if true, check the password and see if it matches,
-    //then redirect to home page
-
-  //if false, redirect to sign up page
-
 class SignUp extends React.Component {
   constructor(props) {
     super(props)
