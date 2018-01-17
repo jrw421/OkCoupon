@@ -14,8 +14,6 @@ import SignUp from './SignUp.js'
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-
-
  //import path files
 
 //Create Nav Bar with links
