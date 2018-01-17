@@ -55,11 +55,10 @@ module.exports.getSaved = function(userID, callback) {
       callback(null, result);
     }
   });
-};
+}
 
-
-module.exports.deleteSaved = function(userID, coupon, callback) {
-  connection.query(`DELETE FROM coupons (user_id) = ('${userID}')`, function(err, result) {
+module.exports.deleteSaved = function(userID, couponURL, callback) {
+  connection.query(`DELETE FROM coupons WHERE (user_id, imgUrl) = ('${userID}', '${couponURL}')`, function(err, result) {
     if (err) {
       callback(err, null);
     } else {
