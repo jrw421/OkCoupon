@@ -168,9 +168,9 @@ app.post('/helper', (req, res) => {
 //
 app.get('/savedCoupons', (req, res) => {
   console.log('id: ', req.query.userID);
-  // db.getSaved(req.body.user_name).then((data) =>{
-  //   res.status(200).send(data)
-  // });
+  db.getSaved(req.query.userID, (err, data) =>{
+    res.status(200).send(data)
+  });
 });
 
 // for(var i = 0; i < data.deals.length; i++) {

@@ -37,7 +37,7 @@ module.exports.addUser = function(user, password, callback) {
 module.exports.addSaved = function(userID, coupon, callback) {
   // connection.query(`SELECT (id) from Users WHERE (user_name) = ('${user}')`, function(err, results) {
   connection.query(`INSERT INTO coupons (user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
-    ('${userID}', '${coupon.lat}', '${coupon.long}', '${coupon.image_url}', '${coupon.title}', '${coupon.price}', '${coupon.discount_percentage}', '${coupon.merchant_name}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
+    ('${userID}', '${coupon.lat}', '${coupon.lon}', '${coupon.image_url}', '${coupon.title}', '${coupon.price}', '${coupon.discount_percentage}', '${coupon.merchant_name}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
       if (err) {
         console.log(err)
         callback(err, null);
@@ -47,8 +47,8 @@ module.exports.addSaved = function(userID, coupon, callback) {
     });
 };
 
-module.exports.getSaved = function(user, callback) {
-    connection.query(`SELECT * from coupons WHERE (user_id) = ('${results[0].id}')`, function(err, result) {
+module.exports.getSaved = function(userID, callback) {
+    connection.query(`SELECT * from coupons WHERE (user_id) = ('${userID}')`, function(err, result) {
       if (err) {
         callback(err, null);
       } else {
