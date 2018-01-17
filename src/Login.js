@@ -34,12 +34,11 @@ class Login extends React.Component {
   }
 
   handleInputClick(e) {
-    // console.log("stuff", this.state.user_name, this.state.password)
-    e.preventDefault()
+    e.preventDefault();
     axios.post('/login', {user_name: this.state.user_name, password: this.state.password})
     .then((data) => {
-      cookies.set(this.state.user_name, data.data[0].id, {path: '/'})
-      console.log(data.data[0])
+      console.log('username: ', this.state.user_name)
+      cookies.set("userID", data.data[0].id, {path: '/'})
       this.props.logIn(this.state.user_name);
     })
     .catch((err) => {
@@ -49,9 +48,6 @@ class Login extends React.Component {
 
 
   render() {
-    // {console.log('username ', this.state.user_name)}
-    // {console.log('password ', this.state.password)}
-
     return (
       <form>
         <input onChange={this.handleInputChangeUserName.bind(this)} type="text" placeholder="username"></input>
