@@ -17,20 +17,23 @@ class Login extends React.Component {
 
     this.state = {
       user_name: '',
-      password: ''
+      password: '',
+      errorHidden: true
     }
   }
 
   handleInputChangeUserName(e) {
     this.setState({
-      user_name: e.target.value
-    })
+      user_name: e.target.value,
+      errorHidden: true
+    });
   }
 
   handleInputChangePassword(e) {
     this.setState({
-      password: e.target.value
-    })
+      password: e.target.value,
+      errorHidden: true
+    });
   }
 
   handleInputClick(e) {
@@ -42,7 +45,9 @@ class Login extends React.Component {
       this.props.logIn(this.state.user_name);
     })
     .catch((err) => {
-      console.log('Do you need to sign up?')
+      this.setState({
+        errorHidden: false
+      });
     })
   }
 
@@ -52,6 +57,7 @@ class Login extends React.Component {
       <form>
         <input onChange={this.handleInputChangeUserName.bind(this)} type="text" placeholder="username"></input>
         <input onChange={this.handleInputChangePassword.bind(this)} type="text" placeholder="password"></input>
+        {this.state.errorHidden === false ? <div id="loginError">Invalid username/password. Please try again.</div> : null}
         <button onClick={this.handleInputClick.bind(this)}>submit</button>
       </form>
       )
