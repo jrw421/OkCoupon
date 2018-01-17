@@ -19,7 +19,7 @@ class SavedDealsComp extends React.Component {
 		console.log('id: ', id);
 	  axios.get('/savedCoupons', {params: {"userID": id}})
 		.then((response) => {
-			console.log('response ', response)
+			console.log('responserdrtfgcctt ', response)
 			this.getDeals(response)
 		})
 
