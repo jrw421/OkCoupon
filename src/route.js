@@ -78,7 +78,7 @@ class Navigation extends React.Component {
                       <div className="nav-link"><Link to="/saved">Saved Coupons</Link></div>
                     </li>
 
-                    <li className="nav-item" onClick={this.logOut}>
+                    <li className="nav-item" onClick={() => {this.logOut()}}>
                       <div className="nav-link"><Link to="/">Log out</Link></div>
                     </li>
 
