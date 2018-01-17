@@ -29,6 +29,7 @@ class Navigation extends React.Component {
       loggedIn: false,
       user_name: ''
     }
+    this.logIn = this.logIn.bind(this)
   }
 
   logIn(username) {
@@ -51,7 +52,7 @@ class Navigation extends React.Component {
     {if (!this.state.loggedIn) {
       return (<div>
         login
-        <Login logIn={this.logIn.bind(this)}/>
+        <Login logIn={this.logIn}/>
         sign up
         <SignUp/>
       </div>)
@@ -60,14 +61,14 @@ class Navigation extends React.Component {
   	  <div>
           <div className="container" styles={{"height": "100%", "width": "100%"}}>
             <div className="container">
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
+              <nav className="navbar navbar-expand{-sm|-md|-lg|-xl} navbar-light bg-light">
                 <a className="navbar-brand" href="#">OkCoupon</a>
 
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="collapse navbar-collapse" id="navbarNav" style={{textAlign: 'right'}}>
                   <ul className="navbar-nav">
 
                     <li className="nav-item active">
@@ -82,7 +83,7 @@ class Navigation extends React.Component {
                       <div className="nav-link"><Link to="/">Log out</Link></div>
                     </li>
 
-                    
+
 
                   </ul>
                 </div>

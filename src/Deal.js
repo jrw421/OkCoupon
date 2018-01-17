@@ -12,7 +12,7 @@ class Deal extends React.Component {
 
 	handleClick(){
 		this.setState({mapDisplay: !this.state.mapDisplay});
-	}	
+	}
 
 	render(){
 		return (

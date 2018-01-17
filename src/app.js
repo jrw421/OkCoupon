@@ -3,7 +3,9 @@ import CouponCard from './CouponCard.js';
 import Swipe from 'react-easy-swipe';
 import axios from 'axios';
 import Map from './map.js';
+import Cookie from 'universal-cookie'
 
+const cookies = new Cookies()
 
 class App extends React.Component {
   constructor(props) {
@@ -52,7 +54,7 @@ class App extends React.Component {
     })
   }
 
-  componentDidUpdate(){
+  componentDidMount(){
     // console.log("inside app anfd updating", this.state)
   }
 
@@ -67,8 +69,10 @@ class App extends React.Component {
   }
 
   YesButton() {
+    var id = cookies.get('userID')
     axios.post('/yes', {
-      // ETHAN:
+      // ETHAN
+      userID: id,
       data: this.state
     })
       .then((response) => {

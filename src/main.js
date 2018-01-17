@@ -62,13 +62,12 @@ class Main extends React.Component {
     let postal = this.state.postal
     if(postal > 1001 && postal < 99950){
       axios.post('/helper', {postal: this.state.postal, filter: this.state.filter}).then((res)=>{
-        this.setState({flag: true})
+        console.log("res.data ", res.data)
+        this.setState({flag:true})
+        setTimeout(() => {
+          this.setState({coupons: res.data})
+        },2000)
       })
-      .then(() => {
-      axios.get('/arrayCoupons').then((response) => {
-        this.setState({coupons: response.data});
-      })
-    })
     }
   }
 ///////////////////////////////////////////////////////////// AARON

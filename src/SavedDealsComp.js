@@ -14,6 +14,7 @@ class SavedDealsComp extends React.Component {
 	componentDidMount() {
 	  axios.get('/savedCoupons')
 		.then((response) => {
+			console.log('response ', response)
 			this.getDeals(response)
 		})
 
