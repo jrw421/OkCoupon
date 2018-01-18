@@ -77,6 +77,7 @@ app.post('/helper', (req, res) => {
     data.deals.forEach((eachDeal) => {
       // check if coupon is already in user's saved coupons:
       if ( savedCoupons[eachDeal.deal.image_url] === undefined ) {
+        console.log('newDeal url: ', eachDeal.deal.url);
         var newDeal = {
               latitude: eachDeal.deal.merchant.latitude.toString(),
               longitude: eachDeal.deal.merchant.longitude.toString(),

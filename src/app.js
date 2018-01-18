@@ -12,6 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       image_url: this.props.Coupon.imgUrl || 'http://psdwizard.com/wp-content/uploads/2016/07/octo-loader.gif',
+      url: this.props.Coupon.url,
       title: this.props.Coupon.title,
       merchant_name: this.props.Coupon.merchant,
       price: this.props.Coupon.price,
@@ -42,6 +43,7 @@ class App extends React.Component {
     // console.log("before setState:", this.state, "this props:", nextProps);
     this.setState({
       image_url: nextProps.Coupon.imgUrl,
+      url: nextProps.Coupon.url,
       title: nextProps.Coupon.title,
       merchant_name: nextProps.Coupon.merchant,
       price: nextProps.Coupon.price,
@@ -55,7 +57,6 @@ class App extends React.Component {
     }, () => {
       axios.get('/saveCount', {params: {"image_url": this.state.image_url}})
       .then((result) => {
-        // console.log('save count for this coupon: ', result.data.length);
         this.setState({saveCount: result.data.length});
       });
     });
@@ -158,7 +159,7 @@ class App extends React.Component {
               top={this.state.top}
               left={this.state.left}
               opacity={this.state.opacity}/>
-            {this.state.saveCount ? <div id="saveCountContainer"><p>{this.state.saveCount} people have saved this coupon.</p></div> : null}
+            {<div id="saveCountContainer"><p>{this.state.saveCount} people have saved this coupon.</p></div>}
         </Swipe>}
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
