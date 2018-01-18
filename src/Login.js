@@ -54,12 +54,18 @@ class Login extends React.Component {
 
   render() {
     return (
-      <form>
-        <input onChange={this.handleInputChangeUserName.bind(this)} type="text" placeholder="username"></input>
-        <input onChange={this.handleInputChangePassword.bind(this)} type="text" placeholder="password"></input>
+      <div className="container" style={{width: "50%", marginLeft: "auto", marginRight: "auto"}}>
+
+      <form className="form-signin">
+      <h3>Login</h3>
+      
+        <input type="email" style={{'margin-bottom': '-1px', 'border-bottom-right-radius': '0', 'border-bottom-left-radius': '0'}} id="inputUser" className="form-control" onChange={this.handleInputChangeUserName.bind(this)} type="text" placeholder="username"></input>
+      
+        <input type="password" style={{'margin-bottom': '10px', 'border-top-left-radius': '0', 'border-top-right-radius': '0'}} id="inputPassword" className="form-control" onChange={this.handleInputChangePassword.bind(this)} type="text" placeholder="password"></input>
         {this.state.errorHidden === false ? <div id="loginError">Invalid username/password. Please try again.</div> : null}
-        <button onClick={this.handleInputClick.bind(this)}>submit</button>
+        <button className="btn btn-lg btn-primary btn-block" onClick={this.handleInputClick.bind(this)}>Log In</button>
       </form>
+      </div>
       )
     }
   }

@@ -61,9 +61,12 @@ class Navigation extends React.Component {
 
     {if (!this.state.loggedIn) {
       return (<div>
-        login
+
+        <br/>
+        <div className="container" style={{textAlign:"center"}}><h2>OkCoupon</h2></div>
+        
         <Login logIn={this.logIn}/>
-        sign up
+        <br/>
         <SignUp/>
       </div>)
     } else {
