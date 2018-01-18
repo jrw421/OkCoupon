@@ -78,7 +78,7 @@ app.use(bodyParser.json());
 app.post('/signUp', (req, res) => {
   let u = req.body.user_name;
   let p = req.body.password;
-  console.log('u and p ', u, ' ', p)
+  // console.log('u and p ', u, ' ', p)
   // save a new username/password combo to users table
   db.addUser(u, p, () => {
     // redirect to login page
@@ -89,7 +89,7 @@ app.post('/signUp', (req, res) => {
 app.post('/login', (req, res) => {
   let u = req.body.user_name;
   let p = req.body.password;
-  console.log('logging in: ', u, p);
+  // console.log('logging in: ', u, p);
   db.authenticateUser(u, p, (err, data) => {
     // console.log('data ', data[0].id) //cookie
     if (data.length) {
@@ -181,8 +181,20 @@ app.post('/helper', (req, res) => {
 //
 app.get('/savedCoupons', (req, res) => {
   console.log('id: ', req.query.userID);
-  db.getSaved(req.query.userID, (err, data) =>{
+  db.getSaved(req.query.userID, (err, data) => {
     res.status(200).send(data)
+  });
+});
+
+app.get('/saveCount', (req, res) => {
+  console.log('image_url to look up: ', req.query.image_url);
+  db.getSaveCount(req.query.image_url, (err, data) => {
+    if ( err ) {
+      console.error('db.getSaveCount error: ', err);
+      res.end();
+    } else {
+      res.send(data);
+    }
   });
 });
 

@@ -23,7 +23,8 @@ class App extends React.Component {
       top: 5,
       left: 0,
       opacity: 1,
-      mapDisplay: false // onClick of button, flip this to render map
+      mapDisplay: false,
+      saveCount: undefined,
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
@@ -51,7 +52,13 @@ class App extends React.Component {
       top: 5,
       left: 0,
       opacity: 1
-    })
+    }, () => {
+      axios.get('/saveCount', {params: {"image_url": this.state.image_url}})
+      .then((result) => {
+        // console.log('save count for this coupon: ', result.data.length);
+        this.setState({saveCount: result.data.length});
+      });
+    });
   }
 
   componentDidMount(){
@@ -151,6 +158,7 @@ class App extends React.Component {
               top={this.state.top}
               left={this.state.left}
               opacity={this.state.opacity}/>
+            {this.state.saveCount ? <div id="saveCountContainer"><p>{this.state.saveCount} people have saved this coupon.</p></div> : null}
         </Swipe>}
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>

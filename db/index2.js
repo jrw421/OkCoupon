@@ -19,7 +19,7 @@ module.exports.authenticateUser = function(user, password, callback) {
 
 module.exports.addUser = function(user, password, callback) {
   connection.query(`SELECT user_name FROM users WHERE (user_name) = ('${user}')`, function(err, results) {
-      console.log('results ', results)
+      // console.log('results ', results)
       if (results.length === 0) {
         connection.query(`INSERT INTO users (user_name, password) VALUES ('${user}', '${password}')`, function(err, results) {
           if (err) {
@@ -67,3 +67,13 @@ module.exports.deleteSaved = function(userID, coupon, callback) {
     }
   });
 };
+
+module.exports.getSaveCount = (image_url, callback) => {
+  connection.query(`SELECT * FROM COUPONS WHERE (imgUrl) = ('${image_url}')`, (err, results) => {
+    if ( err ) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
