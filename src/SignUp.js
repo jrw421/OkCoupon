@@ -53,12 +53,17 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <form>
-        <input onChange={this.handleInputChangeUserName.bind(this)} value={this.state.user_name} type="text" placeholder="username"></input>
-        <input onChange={this.handleInputChangePassword.bind(this)} value={this.state.password} type="text" placeholder="password"></input>
+      <div className="container" style={{width: "50%", marginLeft: "auto", marginRight:"auto"}}>
+
+      <form className="form-signin">
+      <h3>Sign-Up</h3>
+        <input type="username" style={{'margin-bottom': '-1px', 'border-bottom-right-radius': '0', 'border-bottom-left-radius': '0'}} className="form-control" onChange={this.handleInputChangeUserName.bind(this)} value={this.state.user_name} type="text" placeholder="username"></input>
+        <input type="password" style={{'margin-bottom': '10px', 'border-top-left-radius': '0', 'border-top-right-radius': '0'}} className="form-control" onChange={this.handleInputChangePassword.bind(this)} value={this.state.password} type="text" placeholder="password"></input>
         {this.state.errorHidden === false ? <div id="signupError">Invalid username/password. Please try again.</div> : null}
-        <button onClick={this.handleInputClick.bind(this)}>submit</button>
+        <button className="btn btn-lg btn-primary btn-block" onClick={this.handleInputClick.bind(this)}>Sign Up</button>
       </form>
+
+      </div>
       )
     }
   }
