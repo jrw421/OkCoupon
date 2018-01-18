@@ -18,12 +18,12 @@ var couponHelper = function(city, categories, callback) {
 		url: `http://api.sqoot.com/v2/deals?api_key=${key}&location=${city}&order=expires_at&per_page=40${filter}`
 	}
 
-  console.log('doing ,', options.url)
+  // console.log('doing ,', options.url)
 	request.get(options, function(err, res, body) {
 		if (err) {
 			console.log(err)
 		}
-		console.log('response body: ', JSON.parse(body));
+		// console.log('response body: ', JSON.parse(body));
 		callback(JSON.parse(body));
 	})
 
@@ -39,7 +39,7 @@ var categoryList = function(callback) {
       console.log(err)
       callback([])
     }
-    console.log('json: ', JSON.parse(body).categories);
+    // console.log('json: ', JSON.parse(body).categories);
     callback(JSON.parse(body).categories)
   })
 }
