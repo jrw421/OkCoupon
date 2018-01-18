@@ -10,7 +10,9 @@ import {
 import axios from 'axios';
 import Login from './Login.js';
 import SignUp from './SignUp.js';
-//testing out my comments
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies();
 
 class Main extends React.Component {
   constructor(props) {
@@ -31,6 +33,8 @@ class Main extends React.Component {
       flag: false,
       categories: [],
       filter: [],
+      noResults: false,
+      badZip: false
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -52,26 +56,36 @@ class Main extends React.Component {
 
 
     handleChange (e) {
-    this.setState({
-      postal: e.target.value
-    })
+      if ( this.state.noResults || this.state.badZip ) { // remove error messages:
+        this.setState({
+          noResults: false,
+          badZip: false
+        });
+      }
+
+      this.setState({
+        postal: e.target.value
+      })
   }
 
   handleClick () {
-    console.log('going postal!!!!!', this.state.postal)
-    let postal = this.state.postal
-    // if(postal > 1001 && postal < 99950) {
-      axios.post('/helper', {postal: this.state.postal, filter: this.state.filter}).then((res)=>{
+    // console.log('going postal!!!!!', this.state.postal)
+    let postal = this.state.postal;
+    let id = cookies.get('userID')
+    if(postal > 1001 && postal < 99950 && postal.toString().length === 5) {
+      axios.post('/helper', {postal: this.state.postal, filter: this.state.filter, userID: id}).then((res)=>{
         if ( res.data.length > 0 ) {
           this.setState({flag:true})
           setTimeout(() => {
             this.setState({coupons: res.data})
           },2000)
-        } else {
-          alert('invalid zip, ya dingus!'); // should append to a div instead of alerting - fix later.
+        } else { // no results:
+          this.setState({noResults: true});
         }
       });
-    // }
+    } else { // bad zip: 
+      this.setState({badZip: true});
+    }
   }
 ///////////////////////////////////////////////////////////// AARON
   getCategories () {
@@ -125,6 +139,8 @@ class Main extends React.Component {
         <input id="postal" className="password" placeholder="Your Postal Code - Here" type="text" value={this.state.sqrft} onChange={this.handleChange}/>
         <button onClick={this.handleClick} className="btn btn-dark"> Postal Code
         </button>
+        {this.state.badZip ? <div id="zipError"><p>Please enter a valid zip code.</p></div> : null}
+        {this.state.noResults ? <div id="zipError"><p>Sorry, no coupons were found at that zip code.<br/>Please try again with a different zip code.</p></div> : null}
         <br/>
         <div>Select categories to search by (optional)</div><br/>
         <div className="categories" style={{height: '75vh', overflowY: 'scroll', borderStyle: 'groove', borderRadius:'1em'}}>
