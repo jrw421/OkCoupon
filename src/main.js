@@ -60,15 +60,18 @@ class Main extends React.Component {
   handleClick () {
     console.log('going postal!!!!!', this.state.postal)
     let postal = this.state.postal
-    if(postal > 1001 && postal < 99950){
+    // if(postal > 1001 && postal < 99950) {
       axios.post('/helper', {postal: this.state.postal, filter: this.state.filter}).then((res)=>{
-        console.log("res.data ", res.data)
-        this.setState({flag:true})
-        setTimeout(() => {
-          this.setState({coupons: res.data})
-        },2000)
-      })
-    }
+        if ( res.data.length > 0 ) {
+          this.setState({flag:true})
+          setTimeout(() => {
+            this.setState({coupons: res.data})
+          },2000)
+        } else {
+          alert('invalid zip, ya dingus!'); // should append to a div instead of alerting - fix later.
+        }
+      });
+    // }
   }
 ///////////////////////////////////////////////////////////// AARON
   getCategories () {

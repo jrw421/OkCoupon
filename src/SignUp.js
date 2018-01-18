@@ -13,33 +13,41 @@ class SignUp extends React.Component {
 
     this.state = {
       user_name: '',
-      password: ''
+      password: '',
+      errorHidden: true
     }
   }
 
   handleInputChangeUserName(e) {
     this.setState({
-      user_name: e.target.value
+      user_name: e.target.value,
+      errorHidden: true
     })
   }
 
   handleInputChangePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
+      errorHidden: true
     })
   }
 
   handleInputClick(e) {
-
-    e.preventDefault();
-    axios.post('/signUp', {user_name: this.state.user_name, password: this.state.password})
-    .then((res) => {
+    if ( this.state.user_name.length > 0 && this.state.password.length > 0 ) {
+      e.preventDefault();
+      axios.post('/signUp', {user_name: this.state.user_name, password: this.state.password})
+      .then((res) => {
+        this.setState({
+          user_name: '',
+          password: ''
+        })
+        console.log('success!')
+      });
+    } else {
       this.setState({
-        user_name: '',
-        password: ''
-      })
-      console.log('success!')
-    })
+        errorHidden: false
+      });
+    }
   }
 
 
@@ -48,6 +56,7 @@ class SignUp extends React.Component {
       <form>
         <input onChange={this.handleInputChangeUserName.bind(this)} value={this.state.user_name} type="text" placeholder="username"></input>
         <input onChange={this.handleInputChangePassword.bind(this)} value={this.state.password} type="text" placeholder="password"></input>
+        {this.state.errorHidden === false ? <div id="signupError">Invalid username/password. Please try again.</div> : null}
         <button onClick={this.handleInputClick.bind(this)}>submit</button>
       </form>
       )
