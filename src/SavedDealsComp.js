@@ -22,7 +22,6 @@ class SavedDealsComp extends React.Component {
 
 		axios.get('/savedCoupons', {params: {"userID": id}})
 		.then((response) => {
-			console.log('responserdrtfgcctt ', response)
 			this.getDeals(response)
 		})
 	}
@@ -31,7 +30,6 @@ class SavedDealsComp extends React.Component {
 		const id = cookies.get('userID');
 		axios.get('/savedCoupons', {params: {"userID": id}})
 		.then((response) => {
-			console.log('responserdrtfgcctt ', response)
 			this.getDeals(response)
 		})
 	}
