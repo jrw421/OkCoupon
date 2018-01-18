@@ -1,5 +1,8 @@
 import React from 'react';
 import Map from './map.js';
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies();
 
 class Deal extends React.Component {
 	constructor(props) {
@@ -14,10 +17,18 @@ class Deal extends React.Component {
 		this.setState({mapDisplay: !this.state.mapDisplay});
 	}
 
+	// delete() {
+	// 	axios.post('/delete', {params: {"userID": id}})
+	// 	.then((response) => {
+	// 		this.getDeals(response)
+	// 	})
+	// }
+
 	render(){
 		return (
 		<div>
 			<div className="card" style={{"float": "left", "width": "25rem", "height": "30rem", "margin": "10px"}}>
+				<button onClick={() => {var id = cookies.get('userID'); this.props.delete(id, this.props.deal.imgUrl)}}>done wit u</button>
 				{this.state.mapDisplay ? <Map identifier={this.props.deal.id} className="card-img-top" lat={this.props.deal.latitude} lon={this.props.deal.longitude}/> : <img onClick={this.handleClick} className="card-img-top" src={this.props.deal.imgUrl} alt="Card image cap"></img>}
 				<div className="card-block">
 					<h4 className="card-title">{this.props.deal.merchant}</h4>

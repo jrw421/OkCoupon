@@ -101,6 +101,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
+<<<<<<< HEAD
   let u = req.body.user_name;
 
   console.log('logging in: ', u, p);
@@ -109,6 +110,19 @@ app.post('/delete', (req, res) => {
       res.send(data);
     } else {
       res.status(404).end()
+=======
+
+  let i = req.body.params.userID;
+  let c = req.body.params.couponURL;
+
+  console.log('deleting: ', i, c);
+  db.deleteSaved(i, c, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('in server ')
+      res.status(200).send(data)
+>>>>>>> 1/18
     }
   });
 })

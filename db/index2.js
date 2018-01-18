@@ -35,16 +35,15 @@ module.exports.addUser = function(user, password, callback) {
 };
 
 module.exports.addSaved = function(userID, coupon, callback) {
-  // connection.query(`SELECT (id) from Users WHERE (user_name) = ('${user}')`, function(err, results) {
-  connection.query(`INSERT INTO coupons (user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
-    ('${userID}', '${coupon.lat}', '${coupon.lon}', '${coupon.image_url}', '${coupon.title}', '${coupon.price}', '${coupon.discount_percentage}', '${coupon.merchant_name}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
-      if (err) {
-        console.log(err)
-        callback(err, null);
-      } else {
-        callback(null, result);
-      }
-    });
+connection.query(`INSERT INTO coupons (user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
+  ('${userID}', '${coupon.lat}', '${coupon.lon}', '${coupon.image_url}', '${coupon.title}', '${coupon.price}', '${coupon.discount_percentage}', '${coupon.merchant_name}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
+    if (err) {
+      console.log(err)
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
 };
 
 module.exports.getSaved = function(userID, callback) {
@@ -55,11 +54,18 @@ module.exports.getSaved = function(userID, callback) {
       callback(null, result);
     }
   });
+<<<<<<< HEAD
 };
 
 
 module.exports.deleteSaved = function(userID, coupon, callback) {
   connection.query(`DELETE FROM coupons (user_id) = ('${userID}')`, function(err, result) {
+=======
+}
+
+module.exports.deleteSaved = function(userID, couponURL, callback) {
+  connection.query(`DELETE FROM coupons WHERE (user_id, imgUrl) = ('${userID}', '${couponURL}')`, function(err, result) {
+>>>>>>> 1/18
     if (err) {
       callback(err, null);
     } else {
