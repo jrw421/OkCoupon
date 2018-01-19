@@ -12,7 +12,7 @@ import Home from './main.js';
 import SavedDealsComp from './SavedDealsComp.js'
 import Login from './Login.js';
 import SignUp from './SignUp.js';
-import Profile from './Profile.js';
+import Reviews from './Reviews.js';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -99,8 +99,6 @@ class Navigation extends React.Component {
                       <div className="nav-link"><Link to="/profile">Profile</Link></div>
                     </li>
 
-
-
                   </ul>
                 </div>
               </nav>
@@ -109,6 +107,7 @@ class Navigation extends React.Component {
 
   	    <Route exact path="/" component={Home}/>
         <Route path="/saved" component={SavedDealsComp} />
+        <Route path='/reviews' component={Reviews}/>
         {/* <Route path='/profile' component={Profile} route={this.state.user_name} /> */}
         {/* <Route path="/newUser" component={SignUp}/> */}
 

@@ -51,7 +51,7 @@ class SavedDealsComp extends React.Component {
 				<div style={{"left": "50px"}}>
 					<h1>Saved Deals!</h1>
 				</div>
-				<DealList deals={this.state.savedDeals} delete={this.delete}/>
+				<DealList user_name={this.props.user_name} deals={this.state.savedDeals} delete={this.delete}/>
 			</div>
 		)
 	}

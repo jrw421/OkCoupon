@@ -36,7 +36,10 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> user reviews done, delete finished
   let i = req.body.params.userID;
   let c = req.body.params.couponURL;
 
@@ -56,6 +59,68 @@ app.get('/userData', (req, res) => {
   // get all user's saved coupons:
   db.getSaved(u, () => {
     res.status(302).redirect('/saved');
+  });
+});
+
+
+/////////////Reviews//////////////////
+
+app.post('/reviews', (req, res) => {
+  let i = req.body.params.userID;
+  let c = req.body.params.couponURL;
+  let d = req.body.params.description;
+
+  console.log('here is your review data ', i, c, d)
+
+  db.addReview(i, c, d, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('data ', data)
+      res.status(200).send(data)
+    }
+  });
+})
+
+app.get('/reviews', (req, res) => {
+  let c = req.query.couponURL;
+  // get all user's saved coupons:
+  db.getReviews(c, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('data ', data)
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.post('/deleteReview', (req, res) => {
+  let i = req.body.params.userID;
+  let c = req.body.params.couponURL;
+
+  console.log('deleting: ', i, c);
+  db.deleteReview(i, c, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('in server ')
+      res.status(200).send(data)
+    }
+  });
+})
+
+app.get('/userInfo', (req, res) => {
+  let i = req.query.userID;
+  console.log('what is i ', i)
+  // get all user's saved coupons:
+  db.getUserInfo(i, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log('data ', data)
+      res.status(200).send(data);
+    }
   });
 });
 
