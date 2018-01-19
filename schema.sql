@@ -12,6 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE coupons (
   id int NOT NULL AUTO_INCREMENT,
+  coupon_id int NOT NULL,
   user_id int NOT NULL,
   latitude varchar(50) NOT NULL,
   longitude varchar(50) NOT NULL,

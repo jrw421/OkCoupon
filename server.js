@@ -87,7 +87,8 @@ app.post('/helper', (req, res) => {
               discount: JSON.stringify(eachDeal.deal.discount_percentage),
               merchant: eachDeal.deal.merchant.name,
               url: eachDeal.deal.url,
-              pureUrl: eachDeal.deal.untracked_url
+              pureUrl: eachDeal.deal.untracked_url,
+              id: eachDeal.deal.id
             }
         newData.push(newDeal)
       } else {
@@ -122,6 +123,7 @@ app.get('/saveCount', (req, res) => {
 app.post('/yes', (req, res) => {
   let u = req.body.userID;
   let c = req.body.data;
+  console.log('coupon data: ', c);
   db.addSaved(u, c, () => {
     res.status(201).send('saved coupon to db.');
   });
