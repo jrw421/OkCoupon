@@ -141,7 +141,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("APP.JS COUPON: ", this.props.Coupon);
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
         <button id="showMap" onClick={this.toggleMap}>{this.state.mapDisplay ? "show coupon" : "show location"}</button>
@@ -159,6 +158,7 @@ class App extends React.Component {
               discount={this.state.discount_percentage}
               top={this.state.top}
               left={this.state.left}
+              renderType="search"
               opacity={this.state.opacity}/>
             {<div id="saveCountContainer"><p>{this.state.saveCount} people have saved this coupon.</p></div>}
         </Swipe>}

@@ -22,7 +22,7 @@ class Deal extends React.Component {
 	}
 
 	handleClick(){
-		this.setState({mapDisplay: !this.state.mapDisplay});
+		this.setState({mapDisplay: true});
 	}
 
 	changeRoute() {
@@ -84,12 +84,9 @@ class Deal extends React.Component {
 	}
 
 	render(){
-		{console.log('reviewss', this.state.reviews)}
-		{console.log('deessccc ', this.state.description)}
-		// {console.log('username ', this.state.user_name)}
 		return (
 		<div>
-			<span className="card" style={{"float": "left", "width": "24rem", "marginRight": "5px", "marginBottom":"10px", "display":"inline-block"}}>
+			<span className="card" style={{"textAlign": "center", "width": "24rem", "marginRight": "5px", "marginBottom":"10px", "display":"inline-block"}}>
 				<button onClick={() => {var id = cookies.get('userID'); this.deleteComments(id, this.props.deal.imgUrl)}}>delete this coupon</button>
 				{this.state.mapDisplay ? <Map identifier={this.props.deal.id} className="card-img-top" lat={this.props.deal.latitude} lon={this.props.deal.longitude}/> : <img onClick={this.handleClick} className="card-img-top" src={this.props.deal.imgUrl} alt="Card image cap"></img>}
 

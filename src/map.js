@@ -19,7 +19,7 @@ class Map extends React.Component {
 	}
 
 	render() {
-		return (<div id={this.props.identifier ? this.props.identifier : "map"} style={{"position":"relative", "width": "100%", "height": "100%"}}></div>);
+		return this.props.renderType==="saved" ? <div id={this.props.identifier ? this.props.identifier : "map"} style={{"position":"relative", "width": "100%", "height": "100%"}}></div> : <div id={this.props.identifier ? this.props.identifier : "map"} style={{"position":"relative", "width": "100%", "height": "25%"}}></div>
 	}
 }
 
