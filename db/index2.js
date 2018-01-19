@@ -54,18 +54,11 @@ module.exports.getSaved = function(userID, callback) {
       callback(null, result);
     }
   });
-<<<<<<< HEAD
 };
 
 
-module.exports.deleteSaved = function(userID, coupon, callback) {
-  connection.query(`DELETE FROM coupons (user_id) = ('${userID}')`, function(err, result) {
-=======
-}
-
 module.exports.deleteSaved = function(userID, couponURL, callback) {
   connection.query(`DELETE FROM coupons WHERE (user_id, imgUrl) = ('${userID}', '${couponURL}')`, function(err, result) {
->>>>>>> 1/18
     if (err) {
       callback(err, null);
     } else {
@@ -83,3 +76,44 @@ module.exports.getSaveCount = (image_url, callback) => {
     }
   });
 }
+
+module.exports.addReview = function(userID, couponURL, description, callback) {
+  connection.query(`INSERT INTO reviews (user_id, coupon_URL, description) VALUES ('${userID}', '${couponURL}', '${description}')`, function(err, results) {
+    if ( err ) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+module.exports.getReviews = (couponURL, callback) => {
+  connection.query(`SELECT * FROM reviews WHERE (coupon_URL) = ('${couponURL}')`, (err, results) => {
+    if ( err ) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+module.exports.getUserInfo = (userID, callback) => {
+  console.log('whats the big id here ', userID)
+  connection.query(`SELECT * FROM users WHERE (id) = ('${userID}')`, (err, results) => {
+    if ( err ) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+}
+
+module.exports.deleteReview = function(userID, couponURL, callback) {
+  connection.query(`DELETE FROM reviews WHERE (user_id, coupon_URL) = ('${userID}', '${couponURL}')`, function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
