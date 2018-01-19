@@ -11,7 +11,8 @@ Link
 import Home from './main.js';
 import SavedDealsComp from './SavedDealsComp.js'
 import Login from './Login.js';
-import SignUp from './SignUp.js'
+import SignUp from './SignUp.js';
+import Reviews from './Reviews.js';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -22,8 +23,6 @@ const cookies = new Cookies();
 
 //Move route paths to App using React-Router-switch statments
 //React Router switch
-
-// const Navigation = () => (
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -96,7 +95,9 @@ class Navigation extends React.Component {
                       <div className="nav-link"><Link to="/">Log out</Link></div>
                     </li>
 
-
+                    <li className="nav-item">
+                      <div className="nav-link"><Link to="/profile">Profile</Link></div>
+                    </li>
 
                   </ul>
                 </div>
@@ -106,6 +107,8 @@ class Navigation extends React.Component {
 
   	    <Route exact path="/" component={Home}/>
         <Route path="/saved" component={SavedDealsComp} />
+        <Route path='/reviews' component={Reviews}/>
+        {/* <Route path='/profile' component={Profile} route={this.state.user_name} /> */}
         {/* <Route path="/newUser" component={SignUp}/> */}
 
         </div>
