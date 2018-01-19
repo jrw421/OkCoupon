@@ -40,7 +40,7 @@ class App extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log("before setState:", this.state, "this props:", nextProps);
+    console.log("this props:", nextProps);
     this.setState({
       image_url: nextProps.Coupon.imgUrl,
       url: nextProps.Coupon.url,
@@ -78,6 +78,7 @@ class App extends React.Component {
 
   YesButton() {
     var id = cookies.get('userID')
+    console.log('coupon data: ', this.state);
     axios.post('/yes', {
       // ETHAN
       userID: id,
@@ -140,7 +141,7 @@ class App extends React.Component {
   }
 
   render() {
-        // console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
+    console.log("APP.JS COUPON: ", this.props.Coupon);
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
         <button id="showMap" onClick={this.toggleMap}>{this.state.mapDisplay ? "show coupon" : "show location"}</button>

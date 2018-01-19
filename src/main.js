@@ -75,6 +75,7 @@ class Main extends React.Component {
     if(postal > 1001 && postal < 99950 && postal.toString().length === 5) {
       axios.post('/helper', {postal: this.state.postal, filter: this.state.filter, userID: id}).then((res)=>{
         if ( res.data.length > 0 ) {
+          console.log('coupons: ', res.data);
           this.setState({flag:true})
           setTimeout(() => {
             this.setState({coupons: res.data})

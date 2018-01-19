@@ -9,17 +9,16 @@ class SavedDealsComp extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			savedDeals: []
+			savedDeals: [],
+
 		}
 		this.getDeals = this.getDeals.bind(this);
 	}
 
 	componentDidMount() {
 		const id = cookies.get('userID');
-		console.log('id: ', id);
 	  axios.get('/savedCoupons', {params: {"userID": id}})
 		.then((response) => {
-			console.log('responserdrtfgcctt ', response)
 			this.getDeals(response)
 		})
 
