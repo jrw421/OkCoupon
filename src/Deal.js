@@ -37,7 +37,7 @@ class Deal extends React.Component {
   }
 
   saveReview(userID, couponURL, description) {
-		console.log('BUUUUG', userID)
+		console.log('what is the save URL ', couponURL)
     axios.post('/reviews', {params: {userID: userID, couponURL: couponURL, description: description}})
     .then((res) => {
       console.log('in promise', res)
@@ -116,7 +116,7 @@ class Deal extends React.Component {
 						<button onClick={() => {var id = cookies.get('userID'); this.saveReview(id, this.props.deal.imgUrl, this.state.description)}}>submit</button>
 						</form>
 						{this.state.reviews.map((item, i) => {
-							return(<div><a>{this.state.user_name} : {item}</a></div>)
+							return(<div><a>Anonymous : {item}</a></div>)
 						})}
 					</div>
 

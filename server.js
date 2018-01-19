@@ -36,10 +36,6 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/delete', (req, res) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> user reviews done, delete finished
   let i = req.body.params.userID;
   let c = req.body.params.couponURL;
 
@@ -84,6 +80,7 @@ app.post('/reviews', (req, res) => {
 
 app.get('/reviews', (req, res) => {
   let c = req.query.couponURL;
+  console.log('whats body ', req.query.couponURL)
   // get all user's saved coupons:
   db.getReviews(c, (err, data) => {
     if (err) {
