@@ -1,1 +1,2 @@
-web: npm install && node server.js 
+webpack -d --watch
+web: node server.js
