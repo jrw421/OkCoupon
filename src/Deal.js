@@ -22,7 +22,7 @@ class Deal extends React.Component {
 	}
 
 	handleClick(){
-		this.setState({mapDisplay: !this.state.mapDisplay});
+		this.setState({mapDisplay: true});
 	}
 
 	changeRoute() {
@@ -84,22 +84,20 @@ class Deal extends React.Component {
 	}
 
 	render(){
-		{console.log('reviewss', this.state.reviews)}
-		{console.log('deessccc ', this.state.description)}
-		// {console.log('username ', this.state.user_name)}
+		console.log('deal props: ', this.props);
 		return (
 		<div>
-			<span className="card" style={{"float": "left", "width": "24rem", "marginRight": "5px", "marginBottom":"10px", "display":"inline-block"}}>
+			<span className="card" style={{"textAlign": "center", "width": "24rem", "marginRight": "5px", "marginBottom":"10px", "display":"inline-block"}}>
 				<button onClick={() => {var id = cookies.get('userID'); this.deleteComments(id, this.props.deal.imgUrl)}}>delete this coupon</button>
-				{this.state.mapDisplay ? <Map identifier={this.props.deal.id} className="card-img-top" lat={this.props.deal.latitude} lon={this.props.deal.longitude}/> : <img onClick={this.handleClick} className="card-img-top" src={this.props.deal.imgUrl} alt="Card image cap"></img>}
+				{this.state.mapDisplay ? <Map renderType={this.props.renderType} identifier={this.props.deal.id} className="card-img-top" lat={this.props.deal.latitude} lon={this.props.deal.longitude}/> : <img onClick={this.handleClick} className="card-img-top" src={this.props.deal.imgUrl} alt="Card image cap"></img>}
 
 				<div className="card-block">
 					<h4 className="card-title">{this.props.deal.merchant}</h4>
-					<p className="card-text" style={{"whiteSpace":"nowrap","textOverflow":"ellipsis", "width":"100px"}}>{this.props.deal.title}</p>
+					<p className="card-text" style={{"textOverflow":"wrap", "width":"100%"}}>{this.props.deal.title}</p>
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item">Original Price: ${this.props.deal.price}</li>
 						<li className="list-group-item">Discount Percent: {this.props.deal.discount}</li>
-						<li href={this.props.deal.url} className="btn btn-primary" style={{"position": "relative", "bottom": "0px"}}>Deal Link</li>
+						<li className="list-group-item"><a href={this.props.deal.url} target="_blank" className="btn btn-primary" style={{"position": "relative", "bottom": "0px"}}>Deal Link</a></li>
 
 					</ul>
 						<a className="twitter-share-button"
