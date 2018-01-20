@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
+  host: 'okc.ciqkxj8b112q.us-east-2.rds.amazonaws.com',
+  user: 'okC',
+  password: 'okcoupon',
   database: 'okc'
 });
 
@@ -25,6 +25,7 @@ module.exports.addUser = function(user, password, callback) {
           if (err) {
             callback(err, null);
           } else {
+            console.log('results in database ', results)
             callback(null, results);
           }
         })

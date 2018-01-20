@@ -62,8 +62,8 @@ class Navigation extends React.Component {
       return (<div>
 
         <br/>
-        <div className="container" style={{textAlign:"center"}}><h2>OkCoupon</h2></div>
-        
+        <div className="container" style={{textAlign:"center"}}><h2>OkCoupon<img src={'./logo.jpg'} alt="logo"></img></h2></div>
+
         <Login logIn={this.logIn}/>
         <br/>
         <SignUp/>
