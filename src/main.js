@@ -84,7 +84,7 @@ class Main extends React.Component {
           this.setState({noResults: true});
         }
       });
-    } else { // bad zip: 
+    } else { // bad zip:
       this.setState({badZip: true});
     }
   }
@@ -135,9 +135,10 @@ class Main extends React.Component {
   render() {
         if(this.state.flag === false){
               return (
-    <div className='container'>
-    <p> Whats your area code? </p>
-        <input id="postal" className="password" placeholder="Your Postal Code - Here" type="text" value={this.state.sqrft} onChange={this.handleChange}/>
+    <div className='container' style={{textAlign: "center"}}>
+    <p style={{fontSize: "150%"}}> What great deals will you find today? </p>
+        <input style={{fontSize: "100%"}} id="postal" className="password" placeholder="Enter your postal code" type="text" value={this.state.sqrft} onChange={this.handleChange}/>
+        <br></br>
         <button onClick={this.handleClick} className="btn btn-dark"> Postal Code
         </button>
         {this.state.badZip ? <div id="zipError"><p>Please enter a valid zip code.</p></div> : null}
