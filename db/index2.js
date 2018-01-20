@@ -35,7 +35,6 @@ module.exports.addUser = function(user, password, callback) {
 };
 
 module.exports.addSaved = function(userID, coupon, callback) {
-  // connection.query(`SELECT (id) from Users WHERE (user_name) = ('${user}')`, function(err, results) {
   connection.query(`INSERT INTO coupons (coupon_id, user_id, latitude, longitude, imgUrl, title, price, discount, merchant, url, pureUrl) VALUES
     ('${coupon.id}', '${userID}', '${coupon.lat}', '${coupon.lon}', '${coupon.image_url}', '${coupon.title.split(`'`).join('').split(`"`).join('')}', '${coupon.price}', '${coupon.discount_percentage}',
     '${coupon.merchant_name.split(`'`).join('').split(`"`).join('')}', '${coupon.url}', '${coupon.pureUrl}')`, function (err, result) {
